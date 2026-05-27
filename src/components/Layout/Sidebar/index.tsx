@@ -252,14 +252,15 @@ export default function Sidebar() {
                   {username || '管理员'}
                 </span>
               </div>
-              <Button
-                type="text"
+              <div
                 style={{
                   width: 28,
                   height: 28,
-                  minWidth: 28,
-                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   position: 'relative',
+                  flexShrink: 0,
                 }}
               >
                 <BellOutlined
@@ -271,23 +272,23 @@ export default function Sidebar() {
                 <span
                   style={{
                     position: 'absolute',
-                    top: 0,
+                    top: -2,
                     right: -2,
-                    minWidth: 16,
-                    height: 16,
-                    borderRadius: 8,
+                    minWidth: 15,
+                    height: 15,
+                    borderRadius: '7.5px',
                     background: 'var(--red)',
                     color: '#fff',
                     fontSize: 10,
-                    lineHeight: '16px',
+                    lineHeight: '15px',
                     textAlign: 'center',
-                    padding: '0 4px',
+                    padding: '0 3px',
                     fontWeight: 600,
                   }}
                 >
                   29
                 </span>
-              </Button>
+              </div>
             </>
           )}
         </div>
