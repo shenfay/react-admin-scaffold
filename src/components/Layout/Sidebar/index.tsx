@@ -254,14 +254,6 @@ export default function Sidebar() {
               </div>
               <Button
                 type="text"
-                icon={
-                  <BellOutlined
-                    style={{
-                      fontSize: 16,
-                      color: 'var(--text-secondary)',
-                    }}
-                  />
-                }
                 style={{
                   width: 28,
                   height: 28,
@@ -270,17 +262,31 @@ export default function Sidebar() {
                   position: 'relative',
                 }}
               >
-                <Badge
-                  count={29}
-                  size="small"
-                  styles={{ indicator: { borderRadius: '10px' } }}
+                <BellOutlined
                   style={{
-                    background: 'var(--red)',
-                    position: 'absolute',
-                    top: -4,
-                    right: 0,
+                    fontSize: 16,
+                    color: 'var(--text-secondary)',
                   }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: -2,
+                    minWidth: 16,
+                    height: 16,
+                    borderRadius: 8,
+                    background: 'var(--red)',
+                    color: '#fff',
+                    fontSize: 10,
+                    lineHeight: '16px',
+                    textAlign: 'center',
+                    padding: '0 4px',
+                    fontWeight: 600,
+                  }}
+                >
+                  29
+                </span>
               </Button>
             </>
           )}
