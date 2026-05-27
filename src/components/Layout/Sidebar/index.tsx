@@ -102,7 +102,7 @@ export default function Sidebar() {
           {sidebarCollapsed ? (
             <Button
               type="text"
-              icon={<MenuUnfoldOutlined style={{ fontSize: 18 }} />}
+              icon={<MenuUnfoldOutlined style={{ fontSize: 16 }} />}
               onClick={toggleSidebar}
               style={{
                 width: 40,
@@ -147,7 +147,7 @@ export default function Sidebar() {
               </span>
               <Button
                 type="text"
-                icon={<MenuFoldOutlined />}
+                icon={<MenuFoldOutlined style={{ fontSize: 16 }} />}
                 onClick={toggleSidebar}
                 style={{
                   width: 24,

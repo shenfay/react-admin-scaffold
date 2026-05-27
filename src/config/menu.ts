@@ -36,6 +36,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'overview',
     label: '概览',
+    icon: 'DashboardOutlined',
     children: [
       {
         key: 'dashboard',
@@ -49,6 +50,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'data',
     label: '数据中台',
+    icon: 'BarChartOutlined',
     children: [
       {
         key: 'data-overview',
@@ -83,6 +85,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'data-dev',
     label: '数据开发',
+    icon: 'CodeOutlined',
     children: [
       {
         key: 'etl-tasks',
@@ -110,6 +113,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'data-service',
     label: '数据服务',
+    icon: 'ApiOutlined',
     children: [
       {
         key: 'data-interface',
@@ -130,6 +134,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'data-govern',
     label: '数据治理',
+    icon: 'SafetyCertificateOutlined',
     children: [
       {
         key: 'metadata-mgmt',
@@ -157,6 +162,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'monitor',
     label: '监控告警',
+    icon: 'AlertOutlined',
     children: [
       {
         key: 'alert-rules',
@@ -177,6 +183,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'user',
     label: '用户中心',
+    icon: 'TeamOutlined',
     children: [
       {
         key: 'user-management',
@@ -211,6 +218,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'business',
     label: '业务中台',
+    icon: 'ApartmentOutlined',
     children: [
       {
         key: 'content-management',
@@ -239,6 +247,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: 'system',
     label: '系统',
+    icon: 'SettingOutlined',
     children: [
       {
         key: 'operation-log',
