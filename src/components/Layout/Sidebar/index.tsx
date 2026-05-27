@@ -273,11 +273,12 @@ export default function Sidebar() {
                 <Badge
                   count={29}
                   size="small"
+                  styles={{ indicator: { borderRadius: '10px' } }}
                   style={{
                     background: 'var(--red)',
                     position: 'absolute',
-                    top: -2,
-                    right: -2,
+                    top: -4,
+                    right: 0,
                   }}
                 />
               </Button>
