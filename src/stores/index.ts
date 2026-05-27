@@ -92,6 +92,14 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'admin-scaffold-storage',
+      version: 2,
+      migrate: (_persistedState: unknown, version: number) => {
+        // 版本变更时丢弃旧缓存，使用默认初始状态
+        if (version < 2) {
+          return initialUserState as AppState & { sidebarCollapsed: boolean }
+        }
+        return _persistedState as AppState & { sidebarCollapsed: boolean }
+      },
       partialize: state => ({
         sidebarCollapsed: state.sidebarCollapsed,
         userId: state.userId,

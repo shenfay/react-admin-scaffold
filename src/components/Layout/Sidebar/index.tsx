@@ -12,30 +12,34 @@ import type { MenuItem } from '@/config/menu'
 
 const { Sider } = Layout
 
-function renderMenuItems(items: MenuItem[], userMenus: string[]): MenuItem[] {
+function renderMenuItems(items: MenuItem[], userMenus: string[], isLogin: boolean): MenuItem[] {
   return items
     .map(item => {
+      const renderItem = {
+        ...item,
+        icon: item.icon ? getIcon(item.icon as string) : undefined,
+        label: item.badge ? (
+          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            {item.label}
+            <Badge count={item.badge} size="small" style={{ background: 'var(--red)' }} />
+          </span>
+        ) : (
+          item.label
+        ),
+      }
+
       if (item.children) {
-        const filteredChildren = renderMenuItems(item.children, userMenus)
+        const filteredChildren = renderMenuItems(item.children, userMenus, isLogin)
         if (filteredChildren.length === 0) return null
         return {
-          ...item,
+          ...renderItem,
           children: filteredChildren,
         }
       }
-      if (!item.permission || userMenus.includes(item.key)) {
-        return {
-          ...item,
-          icon: item.icon ? getIcon(item.icon as string) : undefined,
-          label: item.badge ? (
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              {item.label}
-              <Badge count={item.badge} size="small" style={{ background: 'var(--red)' }} />
-            </span>
-          ) : (
-            item.label
-          ),
-        }
+
+      // 未登录时显示所有菜单项；已登录时按权限过滤
+      if (!isLogin || !item.permission || userMenus.includes(item.key)) {
+        return renderItem
       }
       return null
     })
@@ -45,10 +49,10 @@ function renderMenuItems(items: MenuItem[], userMenus: string[]): MenuItem[] {
 export default function Sidebar() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { sidebarCollapsed, toggleSidebar, username, menus } = useAppStore()
-  const [openKeys, setOpenKeys] = useState<string[]>(['overview', 'data'])
+  const { sidebarCollapsed, toggleSidebar, username, isLogin, menus } = useAppStore()
+  const [openKeys, setOpenKeys] = useState<string[]>(['overview', 'data', 'data-dev', 'data-service', 'data-govern', 'monitor', 'user', 'business', 'system'])
 
-  const filteredMenu = renderMenuItems(menuConfig, menus)
+  const filteredMenu = renderMenuItems(menuConfig, menus, isLogin)
 
   const handleMenuClick = ({ key }: { key: string }) => {
     const item = menuConfig
