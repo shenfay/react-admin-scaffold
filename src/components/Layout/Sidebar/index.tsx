@@ -12,12 +12,12 @@ import type { MenuItem } from '@/config/menu'
 
 const { Sider } = Layout
 
-function renderMenuItems(items: MenuItem[], userMenus: string[], isLogin: boolean): MenuItem[] {
+function renderMenuItems(items: MenuItem[], userMenus: string[], isLogin: boolean, showIcons: boolean): MenuItem[] {
   return items
     .map(item => {
       const renderItem = {
         ...item,
-        icon: item.icon ? getIcon(item.icon as string) : undefined,
+        icon: showIcons && item.icon ? getIcon(item.icon as string) : undefined,
         label: item.badge ? (
           <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             {item.label}
@@ -29,7 +29,7 @@ function renderMenuItems(items: MenuItem[], userMenus: string[], isLogin: boolea
       }
 
       if (item.children) {
-        const filteredChildren = renderMenuItems(item.children, userMenus, isLogin)
+        const filteredChildren = renderMenuItems(item.children, userMenus, isLogin, showIcons)
         if (filteredChildren.length === 0) return null
         return {
           ...renderItem,
@@ -52,7 +52,7 @@ export default function Sidebar() {
   const { sidebarCollapsed, toggleSidebar, username, isLogin, menus } = useAppStore()
   const [openKeys, setOpenKeys] = useState<string[]>(['overview', 'data', 'data-dev', 'data-service', 'data-govern', 'monitor', 'user', 'business', 'system'])
 
-  const filteredMenu = renderMenuItems(menuConfig, menus, isLogin)
+  const filteredMenu = renderMenuItems(menuConfig, menus, isLogin, sidebarCollapsed)
 
   const handleMenuClick = ({ key }: { key: string }) => {
     const item = menuConfig
@@ -90,7 +90,7 @@ export default function Sidebar() {
         {/* Logo / Toggle */}
         <div
           style={{
-            padding: sidebarCollapsed ? '16px 0' : '16px 12px',
+            padding: sidebarCollapsed ? '16px 8px' : '16px 12px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: sidebarCollapsed ? 'center' : 'flex-start',
@@ -112,6 +112,8 @@ export default function Sidebar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                borderRadius: 8,
+                transition: 'all 0.15s',
               }}
             />
           ) : (
