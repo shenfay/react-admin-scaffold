@@ -15,9 +15,12 @@ const { Sider } = Layout
 function renderMenuItems(items: MenuItem[], userMenus: string[], isLogin: boolean, showIcons: boolean): MenuItem[] {
   return items
     .map(item => {
+      const resolvedIcon = item.icon ? getIcon(item.icon as string) : undefined
+      const isParent = !!item.children
+      // 展开时只隐藏父级菜单图标，叶子菜单始终显示；折叠时全部显示
       const renderItem = {
         ...item,
-        icon: showIcons && item.icon ? getIcon(item.icon as string) : undefined,
+        icon: isParent && !showIcons ? undefined : resolvedIcon,
         label: item.badge ? (
           <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             {item.label}
