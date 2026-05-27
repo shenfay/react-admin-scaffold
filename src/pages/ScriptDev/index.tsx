@@ -47,33 +47,6 @@ export default function ScriptDev() {
   const [resultData, setResultData] = useState<Record<string, unknown>[]>([])
   const [executing, setExecuting] = useState(false)
 
-  const columns = [
-    { title: '脚本名称', dataIndex: 'name', key: 'name' },
-    { title: '版本', dataIndex: 'version', key: 'version', render: (v: string) => <Tag>{v}</Tag> },
-    { title: '更新时间', dataIndex: 'updatedAt', key: 'updatedAt' },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-      render: (v: string) => (
-        <Tag color={v === '已发布' ? 'success' : 'default'}>{v}</Tag>
-      ),
-    },
-    {
-      title: '操作',
-      key: 'action',
-      render: (_: unknown, record: ScriptRecord) => (
-        <Button type="link" onClick={() => {
-          setSelectedScript(record)
-          setScriptContent(record.content)
-          setResultData([])
-        }}>
-          编辑
-        </Button>
-      ),
-    },
-  ]
-
   const handleExecute = () => {
     setExecuting(true)
     setTimeout(() => {
@@ -94,18 +67,58 @@ export default function ScriptDev() {
     : []
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 16 }}>
-      <DataPanel title="脚本列表">
-        <Table
-          dataSource={scriptList}
-          columns={columns}
-          rowKey="id"
-          pagination={false}
-          size="small"
-        />
-      </DataPanel>
+    <div style={{ display: 'flex', gap: 16 }}>
+      {/* 左侧：脚本列表 - 改用卡片列表布局 */}
+      <div style={{ width: 360, flexShrink: 0 }}>
+        <DataPanel title="脚本列表">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {scriptList.map(script => (
+              <div
+                key={script.id}
+                onClick={() => {
+                  setSelectedScript(script)
+                  setScriptContent(script.content)
+                  setResultData([])
+                }}
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: 'var(--radius-sm)',
+                  cursor: 'pointer',
+                  border: selectedScript?.id === script.id
+                    ? '1px solid var(--accent)'
+                    : '1px solid var(--border-color)',
+                  background: selectedScript?.id === script.id
+                    ? 'rgba(61, 90, 128, 0.04)'
+                    : 'transparent',
+                  transition: 'all 0.15s',
+                }}
+                onMouseEnter={e => {
+                  if (selectedScript?.id !== script.id) {
+                    e.currentTarget.style.background = 'var(--hover-bg)'
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (selectedScript?.id !== script.id) {
+                    e.currentTarget.style.background = 'transparent'
+                  }
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                  <span style={{ fontWeight: 500, color: 'var(--text-primary)', fontSize: 14 }}>{script.name}</span>
+                  <Tag color={script.status === '已发布' ? 'success' : 'default'} style={{ marginRight: 0 }}>{script.status}</Tag>
+                </div>
+                <div style={{ display: 'flex', gap: 12, fontSize: 12, color: 'var(--text-muted)' }}>
+                  <span>{script.version}</span>
+                  <span>{script.updatedAt}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </DataPanel>
+      </div>
 
-      <div>
+      {/* 右侧：编辑器 + 结果 */}
+      <div style={{ flex: 1, minWidth: 0 }}>
         <DataPanel
           title={selectedScript ? `编辑: ${selectedScript.name}` : 'SQL 编辑器'}
           extra={
@@ -126,7 +139,7 @@ export default function ScriptDev() {
           <TextArea
             value={scriptContent}
             onChange={e => setScriptContent(e.target.value)}
-            rows={12}
+            rows={16}
             style={{
               fontFamily: 'monospace',
               fontSize: 14,

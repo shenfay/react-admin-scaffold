@@ -13,6 +13,11 @@ import DataSubscription from '@/pages/DataSubscription'
 import MetadataMgmt from '@/pages/MetadataMgmt'
 import DataStandard from '@/pages/DataStandard'
 import DataSecurity from '@/pages/DataSecurity'
+import DataAssets from '@/pages/DataAssets'
+import Organization from '@/pages/Organization'
+import ContentManagement from '@/pages/ContentManagement'
+import Workflow from '@/pages/Workflow'
+import AuditLog from '@/pages/AuditLog'
 import AlertRules from '@/pages/AlertRules'
 import MonitorDashboard from '@/pages/MonitorDashboard'
 import UserManagement from '@/pages/UserManagement'
@@ -71,7 +76,7 @@ const router = createBrowserRouter([
         path: 'data-assets',
         element: (
           <PermissionGuard permission="data:assets">
-            <div>数据资产（开发中）</div>
+            <DataAssets />
           </PermissionGuard>
         ),
       },
@@ -175,7 +180,7 @@ const router = createBrowserRouter([
         path: 'organization',
         element: (
           <PermissionGuard permission="org:view">
-            <div>组织架构（开发中）</div>
+            <Organization />
           </PermissionGuard>
         ),
       },
@@ -191,7 +196,7 @@ const router = createBrowserRouter([
         path: 'content',
         element: (
           <PermissionGuard permission="content:manage">
-            <div>内容管理（开发中）</div>
+            <ContentManagement />
           </PermissionGuard>
         ),
       },
@@ -199,7 +204,7 @@ const router = createBrowserRouter([
         path: 'workflow',
         element: (
           <PermissionGuard permission="workflow:manage">
-            <div>工作流（开发中）</div>
+            <Workflow />
           </PermissionGuard>
         ),
       },
@@ -223,7 +228,7 @@ const router = createBrowserRouter([
         path: 'audit-logs',
         element: (
           <PermissionGuard permission="audit:view">
-            <div>审计日志（开发中）</div>
+            <AuditLog />
           </PermissionGuard>
         ),
       },

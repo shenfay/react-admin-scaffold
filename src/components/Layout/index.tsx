@@ -30,9 +30,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar />
-      <Layout>
+      <Layout style={{ height: '100vh' }}>
         <TopBar />
-        <Content>
+        <Content style={{ overflow: 'hidden', height: 'calc(100vh - 52px)' }}>
           <PageContainer>{children}</PageContainer>
         </Content>
       </Layout>

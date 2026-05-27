@@ -87,60 +87,78 @@ export default function Sidebar() {
           flexDirection: 'column',
         }}
       >
-        {/* Logo */}
+        {/* Logo / Toggle */}
         <div
           style={{
-            padding: '16px 12px',
+            padding: sidebarCollapsed ? '16px 0' : '16px 12px',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: sidebarCollapsed ? 'center' : 'flex-start',
             gap: 10,
             height: 56,
             flexShrink: 0,
           }}
         >
-          <div
-            style={{
-              width: 32,
-              height: 32,
-              minWidth: 32,
-              background: 'var(--accent)',
-              borderRadius: 'var(--radius-sm)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontWeight: 700,
-              fontSize: 15,
-            }}
-          >
-            Z
-          </div>
-          {!sidebarCollapsed && (
-            <span
+          {sidebarCollapsed ? (
+            <Button
+              type="text"
+              icon={<MenuUnfoldOutlined style={{ fontSize: 18 }} />}
+              onClick={toggleSidebar}
               style={{
-                fontSize: 15,
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                flex: 1,
+                width: 40,
+                height: 40,
+                padding: 0,
+                color: 'var(--text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
-            >
-              中台管理
-            </span>
+            />
+          ) : (
+            <>
+              <div
+                style={{
+                  width: 32,
+                  height: 32,
+                  minWidth: 32,
+                  background: 'var(--accent)',
+                  borderRadius: 'var(--radius-sm)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: 15,
+                }}
+              >
+                Z
+              </div>
+              <span
+                style={{
+                  fontSize: 15,
+                  fontWeight: 600,
+                  color: 'var(--text-primary)',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  flex: 1,
+                }}
+              >
+                中台管理
+              </span>
+              <Button
+                type="text"
+                icon={<MenuFoldOutlined />}
+                onClick={toggleSidebar}
+                style={{
+                  width: 24,
+                  height: 24,
+                  minWidth: 24,
+                  padding: 0,
+                  color: 'var(--text-muted)',
+                }}
+              />
+            </>
           )}
-          <Button
-            type="text"
-            icon={sidebarCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={toggleSidebar}
-            style={{
-              width: 24,
-              height: 24,
-              minWidth: 24,
-              padding: 0,
-              color: 'var(--text-muted)',
-            }}
-          />
         </div>
 
         {/* Menu */}
@@ -163,57 +181,61 @@ export default function Sidebar() {
         {/* Footer */}
         <div
           style={{
-            padding: '12px 12px 16px',
+            padding: sidebarCollapsed ? '12px 0 16px' : '12px 12px 16px',
             borderTop: '1px solid var(--border-color)',
             flexShrink: 0,
+            display: 'flex',
+            justifyContent: 'center',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: sidebarCollapsed ? 'center' : 'flex-start',
+              gap: 8,
+              padding: 4,
+              borderRadius: 'var(--radius-sm)',
+              cursor: 'pointer',
+              transition: 'background 0.15s',
+              flex: sidebarCollapsed ? 0 : 1,
+              minWidth: 0,
+              overflow: 'hidden',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'var(--hover-bg)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent'
+            }}
+          >
+            <Avatar
+              size={sidebarCollapsed ? 32 : 28}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: 4,
-                borderRadius: 'var(--radius-sm)',
-                cursor: 'pointer',
-                transition: 'background 0.15s',
-                flex: 1,
-                minWidth: 0,
-                overflow: 'hidden',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'var(--hover-bg)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'transparent'
+                background: 'linear-gradient(135deg, #4ECDC4, #44B09E)',
+                fontSize: sidebarCollapsed ? 13 : 11,
+                fontWeight: 600,
+                minWidth: sidebarCollapsed ? 32 : 28,
               }}
             >
-              <Avatar
-                size={28}
+              {username?.charAt(0) || '管'}
+            </Avatar>
+            {!sidebarCollapsed && (
+              <span
                 style={{
-                  background: 'linear-gradient(135deg, #4ECDC4, #44B09E)',
-                  fontSize: 11,
-                  fontWeight: 600,
-                  minWidth: 28,
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: 'var(--text-primary)',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  marginRight: 4,
                 }}
               >
-                {username?.charAt(0) || '管'}
-              </Avatar>
-              {!sidebarCollapsed && (
-                <span
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: 'var(--text-primary)',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                  }}
-                >
-                  {username || '管理员'}
-                </span>
-              )}
-            </div>
+                {username || '管理员'}
+              </span>
+            )}
+          </div>
+          {!sidebarCollapsed && (
             <Button
               type="text"
               icon={
@@ -243,7 +265,7 @@ export default function Sidebar() {
                 }}
               />
             </Button>
-          </div>
+          )}
         </div>
       </div>
     </Sider>
