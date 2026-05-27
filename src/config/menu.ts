@@ -12,6 +12,13 @@ import {
   ApiOutlined,
   AuditOutlined,
   SettingOutlined,
+  CodeOutlined,
+  PartitionOutlined,
+  SendOutlined,
+  AlertOutlined,
+  MonitorOutlined,
+  LockOutlined,
+  ProfileOutlined,
 } from '@ant-design/icons'
 import React, { type ReactNode } from 'react'
 
@@ -74,6 +81,100 @@ export const menuConfig: MenuItem[] = [
     ],
   },
   {
+    key: 'data-dev',
+    label: '数据开发',
+    children: [
+      {
+        key: 'etl-tasks',
+        label: 'ETL 任务管理',
+        icon: 'NodeIndexOutlined',
+        path: '/etl-tasks',
+        permission: 'etl:manage',
+      },
+      {
+        key: 'data-modeling',
+        label: '数据建模',
+        icon: 'PartitionOutlined',
+        path: '/data-modeling',
+        permission: 'modeling:view',
+      },
+      {
+        key: 'script-dev',
+        label: '脚本开发',
+        icon: 'CodeOutlined',
+        path: '/script-dev',
+        permission: 'script:dev',
+      },
+    ],
+  },
+  {
+    key: 'data-service',
+    label: '数据服务',
+    children: [
+      {
+        key: 'data-interface',
+        label: '数据接口',
+        icon: 'ApiOutlined',
+        path: '/data-interface',
+        permission: 'interface:manage',
+      },
+      {
+        key: 'data-subscription',
+        label: '数据订阅',
+        icon: 'SendOutlined',
+        path: '/data-subscription',
+        permission: 'subscription:manage',
+      },
+    ],
+  },
+  {
+    key: 'data-govern',
+    label: '数据治理',
+    children: [
+      {
+        key: 'metadata-mgmt',
+        label: '元数据管理',
+        icon: 'DatabaseOutlined',
+        path: '/metadata-mgmt',
+        permission: 'metadata:view',
+      },
+      {
+        key: 'data-standard',
+        label: '数据标准',
+        icon: 'SafetyCertificateOutlined',
+        path: '/data-standard',
+        permission: 'standard:manage',
+      },
+      {
+        key: 'data-security',
+        label: '数据安全',
+        icon: 'LockOutlined',
+        path: '/data-security',
+        permission: 'security:manage',
+      },
+    ],
+  },
+  {
+    key: 'monitor',
+    label: '监控告警',
+    children: [
+      {
+        key: 'alert-rules',
+        label: '告警规则',
+        icon: 'AlertOutlined',
+        path: '/alert-rules',
+        permission: 'alert:manage',
+      },
+      {
+        key: 'monitor-dashboard',
+        label: '监控大盘',
+        icon: 'MonitorOutlined',
+        path: '/monitor-dashboard',
+        permission: 'monitor:view',
+      },
+    ],
+  },
+  {
     key: 'user',
     label: '用户中心',
     children: [
@@ -97,6 +198,13 @@ export const menuConfig: MenuItem[] = [
         icon: 'ApartmentOutlined',
         path: '/organization',
         permission: 'org:view',
+      },
+      {
+        key: 'profile',
+        label: '个人中心',
+        icon: 'ProfileOutlined',
+        path: '/profile',
+        permission: 'profile:view',
       },
     ],
   },
@@ -133,6 +241,13 @@ export const menuConfig: MenuItem[] = [
     label: '系统',
     children: [
       {
+        key: 'operation-log',
+        label: '操作日志',
+        icon: 'AuditOutlined',
+        path: '/operation-log',
+        permission: 'operation:log',
+      },
+      {
         key: 'audit-log',
         label: '审计日志',
         icon: 'AuditOutlined',
@@ -164,6 +279,13 @@ const iconMap: Record<string, ReactNode> = {
   ApiOutlined: React.createElement(ApiOutlined),
   AuditOutlined: React.createElement(AuditOutlined),
   SettingOutlined: React.createElement(SettingOutlined),
+  CodeOutlined: React.createElement(CodeOutlined),
+  PartitionOutlined: React.createElement(PartitionOutlined),
+  SendOutlined: React.createElement(SendOutlined),
+  AlertOutlined: React.createElement(AlertOutlined),
+  MonitorOutlined: React.createElement(MonitorOutlined),
+  LockOutlined: React.createElement(LockOutlined),
+  ProfileOutlined: React.createElement(ProfileOutlined),
 }
 
 export function getIcon(name: string): ReactNode {

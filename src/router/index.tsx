@@ -5,9 +5,21 @@ import Dashboard from '@/pages/Dashboard'
 import DataOverview from '@/pages/DataOverview'
 import DataReport from '@/pages/DataReport'
 import DataQuality from '@/pages/DataQuality'
+import ETLTasks from '@/pages/ETLTasks'
+import DataModeling from '@/pages/DataModeling'
+import ScriptDev from '@/pages/ScriptDev'
+import DataInterface from '@/pages/DataInterface'
+import DataSubscription from '@/pages/DataSubscription'
+import MetadataMgmt from '@/pages/MetadataMgmt'
+import DataStandard from '@/pages/DataStandard'
+import DataSecurity from '@/pages/DataSecurity'
+import AlertRules from '@/pages/AlertRules'
+import MonitorDashboard from '@/pages/MonitorDashboard'
 import UserManagement from '@/pages/UserManagement'
 import PermissionManagement from '@/pages/PermissionManagement'
+import Profile from '@/pages/Profile'
 import APIManagement from '@/pages/APIManagement'
+import OperationLog from '@/pages/OperationLog'
 import SystemSettings from '@/pages/SystemSettings'
 
 const router = createBrowserRouter([
@@ -64,6 +76,86 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'etl-tasks',
+        element: (
+          <PermissionGuard permission="etl:manage">
+            <ETLTasks />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'data-modeling',
+        element: (
+          <PermissionGuard permission="modeling:view">
+            <DataModeling />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'script-dev',
+        element: (
+          <PermissionGuard permission="script:dev">
+            <ScriptDev />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'data-interface',
+        element: (
+          <PermissionGuard permission="interface:manage">
+            <DataInterface />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'data-subscription',
+        element: (
+          <PermissionGuard permission="subscription:manage">
+            <DataSubscription />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'metadata-mgmt',
+        element: (
+          <PermissionGuard permission="metadata:view">
+            <MetadataMgmt />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'data-standard',
+        element: (
+          <PermissionGuard permission="standard:manage">
+            <DataStandard />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'data-security',
+        element: (
+          <PermissionGuard permission="security:manage">
+            <DataSecurity />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'alert-rules',
+        element: (
+          <PermissionGuard permission="alert:manage">
+            <AlertRules />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'monitor-dashboard',
+        element: (
+          <PermissionGuard permission="monitor:view">
+            <MonitorDashboard />
+          </PermissionGuard>
+        ),
+      },
+      {
         path: 'users',
         element: (
           <PermissionGuard permission="user:manage">
@@ -88,6 +180,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'profile',
+        element: (
+          <PermissionGuard permission="profile:view">
+            <Profile />
+          </PermissionGuard>
+        ),
+      },
+      {
         path: 'content',
         element: (
           <PermissionGuard permission="content:manage">
@@ -108,6 +208,14 @@ const router = createBrowserRouter([
         element: (
           <PermissionGuard permission="api:manage">
             <APIManagement />
+          </PermissionGuard>
+        ),
+      },
+      {
+        path: 'operation-log',
+        element: (
+          <PermissionGuard permission="operation:log">
+            <OperationLog />
           </PermissionGuard>
         ),
       },
