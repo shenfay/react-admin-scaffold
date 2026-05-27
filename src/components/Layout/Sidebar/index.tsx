@@ -165,6 +165,7 @@ export default function Sidebar() {
         <div style={{ flex: 1, overflow: 'auto', padding: '0 6px' }}>
           <Menu
             mode="inline"
+            inlineCollapsed={sidebarCollapsed}
             selectedKeys={selectedKey ? [selectedKey] : []}
             openKeys={sidebarCollapsed ? [] : openKeys}
             onOpenChange={setOpenKeys}
@@ -181,90 +182,101 @@ export default function Sidebar() {
         {/* Footer */}
         <div
           style={{
-            padding: sidebarCollapsed ? '12px 0 16px' : '12px 12px 16px',
+            padding: sidebarCollapsed ? '8px 0 12px' : '12px 12px 16px',
             borderTop: '1px solid var(--border-color)',
             flexShrink: 0,
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: sidebarCollapsed ? 'center' : 'flex-start',
-              gap: 8,
-              padding: 4,
-              borderRadius: 'var(--radius-sm)',
-              cursor: 'pointer',
-              transition: 'background 0.15s',
-              flex: sidebarCollapsed ? 0 : 1,
-              minWidth: 0,
-              overflow: 'hidden',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'var(--hover-bg)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'transparent'
-            }}
-          >
+          {sidebarCollapsed ? (
             <Avatar
-              size={sidebarCollapsed ? 32 : 28}
+              size={32}
               style={{
                 background: 'linear-gradient(135deg, #4ECDC4, #44B09E)',
-                fontSize: sidebarCollapsed ? 13 : 11,
+                fontSize: 13,
                 fontWeight: 600,
-                minWidth: sidebarCollapsed ? 32 : 28,
+                cursor: 'pointer',
               }}
             >
               {username?.charAt(0) || '管'}
             </Avatar>
-            {!sidebarCollapsed && (
-              <span
+          ) : (
+            <>
+              <div
                 style={{
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color: 'var(--text-primary)',
-                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: 4,
+                  borderRadius: 'var(--radius-sm)',
+                  cursor: 'pointer',
+                  transition: 'background 0.15s',
+                  flex: 1,
+                  minWidth: 0,
                   overflow: 'hidden',
-                  marginRight: 4,
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = 'var(--hover-bg)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = 'transparent'
                 }}
               >
-                {username || '管理员'}
-              </span>
-            )}
-          </div>
-          {!sidebarCollapsed && (
-            <Button
-              type="text"
-              icon={
-                <BellOutlined
+                <Avatar
+                  size={28}
                   style={{
-                    fontSize: 16,
-                    color: 'var(--text-secondary)',
+                    background: 'linear-gradient(135deg, #4ECDC4, #44B09E)',
+                    fontSize: 11,
+                    fontWeight: 600,
+                    minWidth: 28,
+                  }}
+                >
+                  {username?.charAt(0) || '管'}
+                </Avatar>
+                <span
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: 'var(--text-primary)',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {username || '管理员'}
+                </span>
+              </div>
+              <Button
+                type="text"
+                icon={
+                  <BellOutlined
+                    style={{
+                      fontSize: 16,
+                      color: 'var(--text-secondary)',
+                    }}
+                  />
+                }
+                style={{
+                  width: 28,
+                  height: 28,
+                  minWidth: 28,
+                  padding: 0,
+                  position: 'relative',
+                }}
+              >
+                <Badge
+                  count={29}
+                  size="small"
+                  style={{
+                    background: 'var(--red)',
+                    position: 'absolute',
+                    top: -2,
+                    right: -2,
                   }}
                 />
-              }
-              style={{
-                width: 28,
-                height: 28,
-                minWidth: 28,
-                padding: 0,
-                position: 'relative',
-              }}
-            >
-              <Badge
-                count={29}
-                size="small"
-                style={{
-                  background: 'var(--red)',
-                  position: 'absolute',
-                  top: -2,
-                  right: -2,
-                }}
-              />
-            </Button>
+              </Button>
+            </>
           )}
         </div>
       </div>
